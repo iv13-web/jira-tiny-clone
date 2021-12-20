@@ -22,6 +22,13 @@ export class UsersService {
     })
   }
 
+  getUserByEmail(email: string): Promise<User> {
+    return this.userModel.findOne({
+      where: { email },
+      include: { all: true }
+    })
+  }
+
   async deleteUserById(id: number): Promise<void> {
     const user = await this.getUserById(id)
     await user.destroy()
